@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <style>
+        .container {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 200px;
+            left: 200px;
+        }
+        /* svg {
+            transform: rotate(234deg);
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container"></div>
+
+    <script>
+        window.onload = function() {
+            //先绘制一个svg
+            var width = 170; //饼状图形区域的宽
+            var height = 170; //饼状图形区域的高
+            var cx = 74; //圆心位置
+            var cy = 74;
+            var r = 73; //圆半径
+            var svgns = "http://www.w3.org/2000/svg";
+            //创建一个<svg>元素
+            var chart = document.createElementNS(svgns, "svg");
+            chart.setAttribute("width", width);
+            chart.setAttribute("height", height);
+            chart.setAttribute("viewBox", "0 0 " + width + " " + height);
+            //绘制path
+            var path = document.createElementNS(svgns, "path");
+            var d = "M " + 74 + "," + 74 + //从圆心开始
+                " L " + 0 + "," + 0 + //画一条到(x1,y1)的线段
+                " A " + 73 + "," + 73 + //再画一条半径为r的弧
+                " 0 " + 0 + " 1 " + // 弧的详细信息
+                0 + "," + 0 + //弧到(x2,y2)结束
+                " Z"; //d当前路径到(cx,cy)结束
+            path.setAttribute('id', 'path');
+            path.setAttribute("d", d); //设置路径
+            path.setAttribute("fill", 'red'); //设置楔的颜色
+            path.setAttribute("stroke", "black"); //外边框
+            path.setAttribute("stroke-width", "0"); //外边框
+            chart.appendChild(path);
+            var containers = document.getElementById("container");
+            containers.appendChild(chart);
+            pieChart22(100); //给100的时候，绘制一个270度的扇形
+        };
+
+
+
+        function pieChart22(num) {
+            var starttangle = 0;
+            var endangle = (2.7 * num) / 360 * Math.PI * 2; //2.7是把270度分成100份。
+            console.log(endangle);
+            var cx = 74; //圆心位置
+            var cy = 74;
+            var r = 73; //圆半径
+            var x1 = cx + r * Math.sin(0);
+            var y1 = cy - r * Math.cos(0);
+            var x2 = cx + r * Math.sin(endangle);
+            var y2 = cy - r * Math.cos(endangle);
+            //角度大于半圆
+            var big = 0;
+            console.log(endangle, endangle - starttangle);
+            if (endangle - starttangle > Math.PI) big = 1;
+            // var path = document.createElementNS(svgns, "path");
+            //路径信息
+            var d = "M " + cx + "," + cy + //从圆心开始
+                " L " + x1 + "," + y1 + //画一条到(x1,y1)的线段
+                " A " + r + "," + r + //再画一条半径为r的弧
+                " 0 " + big + " 1 " + // 弧的详细信息
+                x2 + "," + y2 + //弧到(x2,y2)结束
+                " Z"; //d当前路径到(cx,cy)结束
+            //path元素的属性
+            var path = document.getElementById('path');
+            path.setAttribute("d", d); //设置路径
+        }
+    </script>
+</body>
+
+</html>
