@@ -1,0 +1,49 @@
+doctype html
+html(lang='en')
+    head
+        title 有感
+        body
+            .chart_part
+                svg.momery_svg(:width="data.width" :height="data.height" viewBox="0 0 300 300")
+                  defs
+                    linearGradient(x1="1" y1="0" x2="0" y2="0" :id="data.gradIdarr[0]")
+                      stop(offset="0%" :stop-color="data.precolorarr[0]")
+                      stop(offset="25%" :stop-color="data.precolorarr[1]")
+                      stop(offset="85%" :stop-color="data.precolorarr[2]")
+                      stop(offset="100%" :stop-color="data.precolorarr[3]")
+                    linearGradient(x1="1" y1="0" x2="0" y2="0" :id="data.gradIdarr[1]")
+                      stop(offset="0%" :stop-color="data.nextcolorarr[0]")
+                      stop(offset="10%" :stop-color="data.nextcolorarr[1]")
+                      stop(offset="20%" :stop-color="data.nextcolorarr[1]")
+                      stop(offset="45%" :stop-color="data.nextcolorarr[2]")
+                      stop(offset="85%" :stop-color="data.nextcolorarr[2]")
+                  g
+                    circle(cx="150" cy="150" :r="data.cradius" stroke-width="18" stroke="rgba(0,0,0,0.2)" fill="none" stroke-linecap="round" id='blackBg' v-if='data.isShowBlackBg')
+                    circle(cx="150" cy="150" :r="data.cradius" :stroke-width="data.cwidth" :stroke="data.bgcolor" fill="none" stroke-linecap="round" :id='data.cidarr[0]')
+                    circle(cx="150" cy="150" :r="data.cradius" :stroke-width="data.cwidth" :stroke="formatGradID(data.gradIdarr[1])" fill="none" stroke-linecap="round" :id='data.cidarr[1]')
+                    circle(cx="150" cy="150" :r="data.cradius" :stroke-width="data.cwidth" :stroke="formatGradID(data.gradIdarr[0])" fill="none" stroke-linecap="round" :id='data.cidarr[2]')
+                  g(transform="rotate(90,150 150)" :id='data.lineidarr[0]')
+                  g(transform="rotate(222,150 150)" :id='data.lineidarr[1]')
+                svg.game_shadow(width="170" height="170" viewBox="0 0 170 170" v-if='isShow')
+                  //- radialGradient(id="radialGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%")
+                  //-   stop(offset="0%" style="stop-color:rgba(255,255,255,0.1);;")
+                  //-   stop(offset="50%" style="stop-color:rgba(255,255,255,0.08);")
+                  //-   stop(offset="100%" style="stop-color:rgba(255,255,255,0.05);")
+                  path(id="shadow" d="M 74,74 L 74,1 A 73,73 0 1 1 4.572874310453798,96.55824058937117 Z" fill="rgba(255,255,255,0.03)" stroke="black" stroke-width="0")
+                svg.game_pointer(width="200px" height="200px" viewBox="0 0 200 200" version="1.1" v-if='isShow')
+                  defs
+                    linearGradient(x1="50%" y1="100%" x2="50%" y2="3.061617e-15%" id="linearGradient-1")
+                        stop(stop-color="#696969" offset="0%")
+                        stop(stop-color="#D8D8D8" offset="100%")
+                          path(d="M5.67295416,0.865932938 L10.1836485,72.0325927 L0.183648548,72.0325927 L4.67494821,0.866068327 C4.69234088,0.59047423 4.92985358,0.381160615 5.20544768,0.398553282 C5.45673442,0.414411919 5.65702735,0.614650506 5.67295416,0.865932938 Z" id="path-2")
+                  g(id="pointer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5")
+                    g(transform="translate(94.854004, 27.950928)")
+                      path(d="M5.67295416,0.865932938 L10.1836485,72.0325927 L0.183648548,72.0325927 L4.67494821,0.866068327 C4.69234088,0.59047423 4.92985358,0.381160615 5.20544768,0.398553282 C5.45673442,0.414411919 5.65702735,0.614650506 5.67295416,0.865932938 Z" id="Triangle" fill="url(#linearGradient-1)" fill-rule="nonzero")
+                      g(id="Path-5")
+                        mask(id="mask-3" fill="white")
+                            use(xlink:href="#path-2")
+                        use(id="Mask" fill="url(#linearGradient-1)" fill-rule="nonzero" xlink:href="#path-2")
+                        polygon(fill="#D8D8D8" fill-rule="nonzero" opacity="0.300000012" mask="url(#mask-3)" points="5.17248535 72.824977 5.17248535 -6.68225098 0.00436401367 71.748291")
+                      circle(id="Oval" fill="#767676" fill-rule="nonzero" cx="5.17248535" cy="72.032959" r="5")
+                      circle(id="Oval" fill="#333333" fill-rule="nonzero" cx="5.17248535" cy="72.032959" r="3")
+

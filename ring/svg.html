@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>圆环效果</title>
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.85);
+        }
+        
+        .momery_svg {
+            transform: rotate(144deg);
+        }
+        
+        #circle4 {
+            transform: rotate(126deg);
+            transform-origin: center;
+        }
+        
+        .game_shadow {
+            position: absolute;
+            margin-left: -192px;
+            margin-top: 10px;
+            transform: rotate(-126deg);
+        }
+        
+        .game_pointer {
+            position: absolute;
+            margin-left: -210px;
+            margin-top: 10px;
+            transform: rotate(-126deg);
+        }
+    </style>
+
+
+    <body>
+        <div class="chart_part">
+            <svg class="momery_svg" width="220" height="220" viewBox="0 0 300 300">
+          <defs>
+            <linearGradient x1="1" y1="0" x2="0" y2="0" id="grad1">
+              <stop offset="0%" stop-color="#4DACFF"></stop>
+              <stop offset="25%" stop-color="#6488CB"></stop>
+              <stop offset="85%" stop-color="#D01A29"></stop>
+              <stop offset="100%" stop-color="#D01A29"></stop>
+            </linearGradient>
+            <linearGradient x1="1" y1="0" x2="0" y2="0" id="grad2">
+              <stop offset="0%" stop-color="#D01A29"></stop>
+              <stop offset="10%" stop-color="#D01A29"></stop>
+              <stop offset="20%" stop-color="#D01A29"></stop>
+              <stop offset="45%" stop-color="#F40000"></stop>
+              <stop offset="85%" stop-color="#F40000"></stop>
+            </linearGradient>
+          </defs>
+          <g>
+            <circle cx="150" cy="150" r="130" stroke-width="18" stroke="rgba(0,0,0,0.2)" fill="none" stroke-linecap="round" id="blackBg" v-if="data.isShowBlackBg"></circle>
+            <circle cx="150" cy="150" r="130" stroke-width="13" stroke="rgba(51,51,51,0.5)" fill="none" stroke-linecap="round" id="bg_ring2"></circle>
+            <circle cx="150" cy="150" r="130" stroke-width="13" stroke="url(#grad2)" fill="none" stroke-linecap="round" id="circle4"></circle>
+            <circle cx="150" cy="150" r="130" stroke-width="13" stroke="url(#grad1)" fill="none" stroke-linecap="round" id="circle3"></circle>
+          </g>
+          <g transform="rotate(90,150 150)" id="lines3"></g>
+          <g transform="rotate(222,150 150)" id="lines4"></g>
+        </svg>
+            <svg class="game_shadow" width="170" height="170" viewBox="0 0 170 170">
+          <path id="shadow" d="M 74,74 L 74,1 A 73,73 0 1 1 4.572874310453798,96.55824058937117 Z" fill="rgba(255,255,255,0.03)" stroke="black" stroke-width="0"></path>
+        </svg>
+            <svg class="game_pointer" width="200px" height="200px" viewBox="0 0 200 200" version="1.1">
+          <defs>
+            <linearGradient x1="50%" y1="100%" x2="50%" y2="3.061617e-15%" id="linearGradient-1">
+              <stop stop-color="#696969" offset="0%"></stop>
+              <stop stop-color="#D8D8D8" offset="100%">
+                <path d="M5.67295416,0.865932938 L10.1836485,72.0325927 L0.183648548,72.0325927 L4.67494821,0.866068327 C4.69234088,0.59047423 4.92985358,0.381160615 5.20544768,0.398553282 C5.45673442,0.414411919 5.65702735,0.614650506 5.67295416,0.865932938 Z" id="path-2"></path>
+              </stop>
+            </linearGradient>
+          </defs>
+          <g id="pointer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+            <g transform="translate(94.854004, 27.950928)">
+              <path d="M5.67295416,0.865932938 L10.1836485,72.0325927 L0.183648548,72.0325927 L4.67494821,0.866068327 C4.69234088,0.59047423 4.92985358,0.381160615 5.20544768,0.398553282 C5.45673442,0.414411919 5.65702735,0.614650506 5.67295416,0.865932938 Z" id="Triangle" fill="url(#linearGradient-1)" fill-rule="nonzero"></path>
+              <g id="Path-5">
+                <mask id="mask-3" fill="white">
+                  <use xlink:href="#path-2"></use>
+                </mask>
+                <use id="Mask" fill="url(#linearGradient-1)" fill-rule="nonzero" xlink:href="#path-2"></use>
+                <polygon fill="#D8D8D8" fill-rule="nonzero" opacity="0.300000012" mask="url(#mask-3)" points="5.17248535 72.824977 5.17248535 -6.68225098 0.00436401367 71.748291"></polygon>
+              </g>
+              <circle id="Oval" fill="#767676" fill-rule="nonzero" cx="5.17248535" cy="72.032959" r="5"></circle>
+              <circle id="Oval" fill="#333333" fill-rule="nonzero" cx="5.17248535" cy="72.032959" r="3"></circle>
+            </g>
+          </g>
+        </svg>
+        </div>
+        <script src='dragSvg.js'></script>
+        <script>
+            function drawMomeryChart(num) {
+                DrawSVG('circle3', 'circle4', 'lines3', 'lines4', 'bg_ring2', 'momery_per_num', true, num, true, true);
+            }
+            window.onload = function() {
+                drawMomeryChart(83);
+            }
+
+            // momerydata: chartData = {
+            //     width: 220,
+            //     height: 220,
+            //     precolorarr: ['#4DACFF', '#6488CB', '#D01A29', '#D01A29'],
+            //     nextcolorarr: ['#D01A29', '#D01A29', '#F40000', '#F40000'],
+            //     cradius: 130,
+            //     cwidth: 13,
+            //     lineidarr: ['lines3', 'lines4'],
+            //     cidarr: ['bg_ring2', 'circle4', 'circle3'],
+            //     bgcolor: 'rgba(51,51,51,0.5)',
+            //     gradIdarr: ['grad1', 'grad2'],
+            //     isShowShadow: false,
+            //     isShowBlackBg: true
+            // }
+        </script>
+    </body>
+</head>
+
+</html>
